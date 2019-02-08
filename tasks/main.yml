@@ -8,4 +8,8 @@
     msg: No kubectl installed!
   when: ingress_check_kubectl.stdout == "kubectl not found"
 
+- name: Ensure ingress-nginx namespace is present
+  
 
+- name: Deploy initial ConfigMaps
+  shell: "kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-{{ ingress_nginx_version }}/deploy/configmap.yaml"
