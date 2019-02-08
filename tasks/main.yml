@@ -1,0 +1,11 @@
+---
+- name: Check if kubectl is installed
+  shell: which kubectl
+  register: ingress_check_kubectl
+
+- name: Fail if no kubectl is found
+  fail:
+    msg: No kubectl installed!
+  when: ingress_check_kubectl.stdout == "kubectl not found"
+
+
