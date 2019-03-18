@@ -1,15 +1,37 @@
 ---
-- name: Check if kubectl is installed
-  shell: which kubectl
-  register: ingress_check_kubectl
+- name: Deploy ingress namespace
+  local_action:
+    module: k8s
+    state: "{{ ingress_nginx_resource_state }}"
+    kubeconfig: "{{ ingress_nginx_resource_kubeconfig }}"
+    definition: "{{ lookup('template', 'namespace.yml.j2') }}"
 
-- name: Fail if no kubectl is found
-  fail:
-    msg: No kubectl installed!
-  when: ingress_check_kubectl.stdout == "kubectl not found"
+- name: Deploy ingress ConfigMaps
+  local_action:
+    module: k8s
+    state: "{{ ingress_nginx_resource_state }}"
+    kubeconfig: "{{ ingress_nginx_resource_kubeconfig }}"
+    definition: "{{ lookup('template', item) }}"
+  with_items:
+    - 'configmaps/nginx-configuration.yml.j2'
+    - 'configmaps/tcp-services.yml.j2'
+    - 'configmaps/udp-services.yml.j2'
 
-- name: Ensure ingress-nginx namespace is present
-  
+- name: Deploy ingress RBAC
+  local_action:
+    module: k8s
+    state: "{{ ingress_nginx_resource_state }}"
+    kubeconfig: "{{ ingress_nginx_resource_kubeconfig }}"
+    definition: "{{ lookup('template', item) }}"
+  with_items:
+    - 'rbac/clusterrole.yml.j2'
+    - 'rbac/clusterrolebinding.yml.j2'
+    - 'rbac/role.yml.j2'
+    - 'rbac/rolebinding.yml.j2'
 
-- name: Deploy initial ConfigMaps
-  shell: "kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-{{ ingress_nginx_version }}/deploy/configmap.yaml"
+- name: Deploy ingress DaemonSet
+  local_action:
+    module: k8s
+    state: "{{ ingress_nginx_resource_state }}"
+    kubeconfig: "{{ ingress_nginx_resource_kubeconfig }}"
+    definition: "{{ lookup('template', 'daemon-set.yml.j2') }}"

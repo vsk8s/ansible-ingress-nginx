@@ -1,5 +1,24 @@
 ---
-ingress_nginx_version: "0.22.0"
+# Stuff you maybe want to change
+ingress_nginx_version: '0.23.0'
 
 ingress_nginx_tcp_ports: []
+# ingress_nginx_tcp_ports:
+#   - port; 1409
+#     service: 'lmtp/my-lmtp-service'
 ingress_nginx_udp_ports: []
+# ingress_nginx_udp_ports:
+#   - port; 53
+#     service: 'dns/my-dns-service'
+
+ingress_nginx_resource_state: present
+ingress_nginx_resource_kubeconfig: '~/.kube/config'
+
+# Stuff you might not want to change
+ingress_nginx_namespace: 'ingress-nginx'
+ingress_nginx_serviceaccount: 'ingress-nginx'
+ingress_nginx_role: 'ingress-nginx'
+ingress_nginx_rolebinding: 'ingress-nginx'
+ingress_nginx_clusterrole: 'ingress-nginx'
+ingress_nginx_clusterrolebinding: 'ingress-nginx'
+ingress_nginx_daemonset_name: 'ingress-nginx'

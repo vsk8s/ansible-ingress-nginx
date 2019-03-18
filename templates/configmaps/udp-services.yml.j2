@@ -1,0 +1,15 @@
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: udp-services
+  namespace: {{ ingress_nginx_namespace }}
+  labels:
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/part-of: ingress-nginx
+{% if ingress_nginx_udp_services %}
+data:
+{% for item in ingress_nginx_udp_services %}
+  {{ item.port }}: '{{ item.service }}'
+{% endfor %}
+{% endif %}
