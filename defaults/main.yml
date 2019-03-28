@@ -2,14 +2,12 @@
 # Stuff you maybe want to change
 ingress_nginx_version: '0.23.0'
 
-ingress_nginx_tcp_ports: []
-# ingress_nginx_tcp_ports:
-#   - port; 1409
-#     service: 'lmtp/my-lmtp-service'
-ingress_nginx_udp_ports: []
-# ingress_nginx_udp_ports:
-#   - port; 53
-#     service: 'dns/my-dns-service'
+ingress_nginx_tcp_services: []
+# - port: 1409
+#   service: 'lmtp/my-lmtp-service'
+ingress_nginx_udp_services: []
+# - port: 53
+#   service: 'dns/my-dns-service'
 
 ingress_nginx_resource_state: present
 ingress_nginx_resource_kubeconfig: '~/.kube/config'

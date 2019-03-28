@@ -28,6 +28,7 @@
     - 'rbac/clusterrolebinding.yml.j2'
     - 'rbac/role.yml.j2'
     - 'rbac/rolebinding.yml.j2'
+    - 'rbac/serviceaccount.yml.j2'
 
 - name: Deploy ingress DaemonSet
   local_action:
