@@ -30,6 +30,13 @@
     - 'rbac/rolebinding.yml.j2'
     - 'rbac/serviceaccount.yml.j2'
 
+- name: Deploy ingress Service
+  local_action:
+    module: k8s
+    state: "{{ ingress_nginx_resource_state }}"
+    kubeconfig: "{{ ingress_nginx_resource_kubeconfig }}"
+    definition: "{{ lookup('template', 'service.yml.j2') }}"
+
 - name: Deploy ingress DaemonSet
   local_action:
     module: k8s
