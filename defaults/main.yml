@@ -20,3 +20,5 @@ ingress_nginx_rolebinding: 'ingress-nginx'
 ingress_nginx_clusterrole: 'ingress-nginx'
 ingress_nginx_clusterrolebinding: 'ingress-nginx'
 ingress_nginx_daemonset_name: 'ingress-nginx'
+
+ingress_nginx_loadbalancer_cidr: ''
