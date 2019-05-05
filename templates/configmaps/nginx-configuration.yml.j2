@@ -11,3 +11,7 @@ data:
   proxy-real-ip-cidr: '{{ ingress_nginx_loadbalancer_cidr }}'
   use-proxy-protocol: 'true'
   use-forwarded-headers: 'true'
+  use-http2: 'true'
+  server-snippet: |
+    listen 81 http2 proxy_protocol;
+    listen [::]:81 http2 proxy_protocol;

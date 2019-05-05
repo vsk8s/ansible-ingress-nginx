@@ -14,8 +14,6 @@
     definition: "{{ lookup('template', item) }}"
   with_items:
     - 'configmaps/nginx-configuration.yml.j2'
-    - 'configmaps/tcp-services.yml.j2'
-    - 'configmaps/udp-services.yml.j2'
 
 - name: Deploy ingress RBAC
   local_action:
