@@ -24,7 +24,7 @@ spec:
       serviceAccountName: {{ ingress_nginx_serviceaccount }}
       containers:
         - name: nginx-ingress-controller
-          image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:{{ ingress_nginx_version }}
+          image: k8s.gcr.io/ingress-nginx/controller:{{ ingress_nginx_version }}
           args:
             - /nginx-ingress-controller
             - --configmap=$(POD_NAMESPACE)/nginx-configuration
@@ -37,8 +37,7 @@ spec:
                 - ALL
               add:
                 - NET_BIND_SERVICE
-            # www-data -> 33
-            runAsUser: 33
+            runAsUser: 101
           env:
             - name: POD_NAME
               valueFrom:
